@@ -55,7 +55,12 @@ dependencies {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.14.0"
+        def protobufVersion = "3.14.0"
+        if (project.hasProperty('protoc_platform')) {
+            artifact = "com.google.protobuf:protoc:${protobufVersion}:${protoc_platform}"
+        } else {
+            artifact = "com.google.protobuf:protoc:${protobufVersion}"
+        }
     }
 
     // Generates the java Protobuf-lite code for the Protobufs in this project. See
